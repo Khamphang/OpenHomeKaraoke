@@ -1,3 +1,18 @@
+# OpenHomeKaraoke — Na Khamphang's Lao-localized build
+
+> **Credits & Acknowledgements**
+>
+> This repository is based on the excellent work of **[@xuancong84](https://github.com/xuancong84)** — the original author of [OpenHomeKaraoke](https://github.com/xuancong84/OpenHomeKaraoke), which itself is forked from **[@vicwomg](https://github.com/vicwomg)**'s PiKaraoke and uses **[@tsurumeso](https://github.com/tsurumeso)**'s DNN-based vocal splitter. Full credit for the core system goes to them.
+>
+> This build by **Na Khamphang ([@Khamphang](https://github.com/Khamphang))** adds:
+> - Lao (ລາວ) language as default
+> - Windows launcher that uses local Python (no Miniconda required)
+> - Portable paths using `%USERPROFILE%\pikaraoke-songs`
+>
+> Please see the original documentation below for full feature details.
+
+---
+
 # OpenHomeKaraoke 【开源之家卡啦OK】 (The World's best open-source Home Karaoke system)
 
 This is the world's best open-source YouTube-based Home Karaoke system up to today (2024.4), originally named as PiKaraoke, forked from @vicwomg's repo (thanks to https://github.com/vicwomg/pikaraoke/) and thoroughly revamped and incorporated @tsurumeso's DNN-based (deep neural network) vocal splitter (thanks to https://github.com/tsurumeso/vocal-remover). OpenHomeKaraoke is a "KTV"-style Karaoke song search, download, and queueing system. It runs on your PC or Raspberry Pi, with screen projected to your TV either via an HDMI cable, or screen sharing, or using TV's web-browser (backend KTV player is screen-captured and streamed to HTTP), and shows a QR code for computers and smartphones to connect to a web interface. From there, multiple users can seamlessly search your local track library, queue up songs, add an endless selection of new Karaoke tracks from YouTube, and more. Compared to its former (https://github.com/xuancong84/pikaraoke.git), OpenHomeKaraoke uses web-sockets to communicate so as to save network bandwidth and it supports speech recognition. OpenHomeKaraoke Works on Linux, Windows, Raspberry Pi, and Mac OS!

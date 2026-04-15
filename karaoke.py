@@ -464,6 +464,7 @@ class Karaoke:
 		return json.loads(out_json)
 
 	def get_downloaded_file_basename(self, url):
+		info_json = None
 		try:
 			youtube_id = url.split("watch?v=")[1].split('&')[0]
 		except:
@@ -479,6 +480,13 @@ class Karaoke:
 		except:
 			pass
 
+		if info_json is None:
+			try:
+				info_json = self.get_yt_dlp_json(url)
+			except:
+				logging.error("Error fetching video info for fallback filename lookup: " + url)
+				return None
+
 		filename = f"{info_json['title']}---{info_json['id']}.{info_json['ext']}"
 		return filename if os.path.isfile(self.download_path+'tmp/'+filename) else None
 
@@ -487,9 +495,9 @@ class Karaoke:
 		getString2 = lambda ii: os.langs.get(client_lang, os.langs['en_US'])[ii]
 		self.downloading_songs[song_url] = 1
 		dl_path = "%(title)s---%(id)s.%(ext)s"
-		opt_quality = ['-f', 'bestvideo[height<=1080]+bestaudio[abr<=160]'] if high_quality else ['-f', 'mp4+m4a']
+		opt_quality = ['-f', 'bestvideo[height<=1080]+bestaudio[abr<=160]/best[height<=1080]/best'] if high_quality else ['-f', 'mp4+m4a/best[ext=mp4]/best']
 		opt_sub = ['--sub-langs', 'all', '--embed-subs'] if include_subtitles else []
-		cmd = ['--fixup', 'force', '--socket-timeout', '3', '-R', 'infinite', '--remux-video', 'mp4'] + self.cookies_opt + opt_quality +\
+		cmd = ['--fixup', 'force', '--socket-timeout', '30', '-R', '5', '--remux-video', 'mp4'] + self.cookies_opt + opt_quality +\
 		      ["-o", self.download_path+'tmp/'+dl_path] + opt_sub + [song_url]
 		logging.info("Youtube-dl command: " + " ".join(cmd))
 		rc = self.call_yt_dlp(cmd)
